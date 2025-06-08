@@ -1,0 +1,17 @@
+# .github/workflows/auto-comment.yml
+name: Claude Auto Comment
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  comment:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Post a comment
+        run: |
+          echo "Claudeに業務改善ネタを相談中..." > comment.txt
+          gh issue comment ${{ github.event.issue.number }} -F comment.txt
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
