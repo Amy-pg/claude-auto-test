@@ -1,4 +1,3 @@
-# .github/workflows/auto-comment.yml
 name: Claude Auto Comment
 
 on:
@@ -8,8 +7,12 @@ on:
 jobs:
   comment:
     runs-on: ubuntu-latest
+
     steps:
-      - name: Post a comment
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Post a comment on the issue
         run: |
           echo "Claudeに業務改善ネタを相談中..." > comment.txt
           gh issue comment ${{ github.event.issue.number }} -F comment.txt
